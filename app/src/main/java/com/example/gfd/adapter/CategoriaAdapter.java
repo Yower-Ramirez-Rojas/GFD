@@ -14,11 +14,21 @@ import java.util.List;
 public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.CategoriaHolder> {
 
     private List<Categoria> listaCategorias = new ArrayList<>();
+    private double sueldoBase = 0;
+    private OnItemLongClickListener listener; // Nuestro nuevo escuchador
+
+    // Interfaz para avisarle al MainActivity qué tarjeta presionaste
+    public interface OnItemLongClickListener {
+        void onItemLongClick(Categoria categoria);
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
     public CategoriaHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Aquí conectamos el molde XML que acabas de crear
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_categoria, parent, false);
         return new CategoriaHolder(itemView);
@@ -26,24 +36,25 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
     @Override
     public void onBindViewHolder(@NonNull CategoriaHolder holder, int position) {
-        // Aquí tomamos cada categoría y escribimos sus datos en la tarjeta
         Categoria categoriaActual = listaCategorias.get(position);
         holder.tvNombre.setText(categoriaActual.nombre);
-        // Formateamos el texto para que se vea como dinero
-        holder.tvMonto.setText(String.format("$%.0f", categoriaActual.montoAsignado));
+        holder.tvMonto.setText(String.format("$%,.0f", categoriaActual.montoAsignado));
+
+        if (sueldoBase > 0) {
+            double porcentaje = (categoriaActual.montoAsignado / sueldoBase) * 100;
+            holder.tvPorcentaje.setText(String.format("%.1f%%", porcentaje));
+        } else {
+            holder.tvPorcentaje.setText("0%");
+        }
     }
 
     @Override
     public int getItemCount() {
-        // Seguro de vida 1: Si por alguna razón llega nulo, decimos que hay 0 tarjetas
-        if (listaCategorias == null) {
-            return 0;
-        }
+        if (listaCategorias == null) return 0;
         return listaCategorias.size();
     }
 
     public void setCategorias(List<Categoria> categorias) {
-        // Seguro de vida 2: Solo actualizamos la lista si Room nos envía datos reales
         if (categorias != null) {
             this.listaCategorias = categorias;
         } else {
@@ -52,15 +63,31 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         notifyDataSetChanged();
     }
 
-    // Clase interna que enlaza los textos del XML con el código
+    public void setSueldoBase(double sueldoBase) {
+        this.sueldoBase = sueldoBase;
+        notifyDataSetChanged();
+    }
+
     class CategoriaHolder extends RecyclerView.ViewHolder {
         private TextView tvNombre;
         private TextView tvMonto;
+        private TextView tvPorcentaje;
 
         public CategoriaHolder(@NonNull View itemView) {
             super(itemView);
             tvNombre = itemView.findViewById(R.id.tvNombreCategoria);
             tvMonto = itemView.findViewById(R.id.tvMontoCategoria);
+            tvPorcentaje = itemView.findViewById(R.id.tvPorcentaje);
+
+            // ¡Aquí detectamos que mantuviste el dedo presionado!
+            itemView.setOnLongClickListener(v -> {
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onItemLongClick(listaCategorias.get(position));
+                    return true; // true significa "yo me encargo de este clic"
+                }
+                return false;
+            });
         }
     }
 }

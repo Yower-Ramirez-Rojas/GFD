@@ -12,27 +12,22 @@ import com.example.gfd.repository.CategoriaRepository;
 public class CategoriaViewModel extends AndroidViewModel {
 
     private CategoriaRepository repository;
-    private LiveData<List<Categoria>> todasLasCategorias;
-    private LiveData<Double> saldoTotal;
 
     public CategoriaViewModel(@NonNull Application application) {
         super(application);
-        // Conectamos con el repositorio que acabas de crear
         repository = new CategoriaRepository(application);
-        todasLasCategorias = repository.getTodasLasCategorias();
-        saldoTotal = repository.getSaldoTotal();
     }
 
-    // --- MÉTODOS PARA QUE LA PANTALLA LEA LOS DATOS ---
-    public LiveData<List<Categoria>> getTodasLasCategorias() {
-        return todasLasCategorias;
+    // Pasamos el ID hacia el repositorio
+    public LiveData<List<Categoria>> getCategoriasPorPresupuesto(int presupuestoId) {
+        return repository.getCategoriasPorPresupuesto(presupuestoId);
     }
 
-    public LiveData<Double> getSaldoTotal() {
-        return saldoTotal;
+    // Pasamos el ID hacia el repositorio
+    public LiveData<Double> getSaldoTotalPorPresupuesto(int presupuestoId) {
+        return repository.getSaldoTotalPorPresupuesto(presupuestoId);
     }
 
-    // --- MÉTODOS PARA QUE LA PANTALLA ENvíE ÓRDENES DE GUARDAR/BORRAR ---
     public void insertar(Categoria categoria) {
         repository.insertar(categoria);
     }
