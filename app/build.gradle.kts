@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -29,6 +30,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+
 }
 
 dependencies {
@@ -53,4 +56,12 @@ dependencies {
     val lifecycle_version = "2.8.4"
     implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
+
+    implementation(platform("com.google.firebase:firebase-bom:35.0.0"))
+
+    // 2. La librería para manejar usuarios en Firebase
+    implementation("com.google.firebase:firebase-auth")
+
+    // 3. La ventanita oficial de Google para iniciar sesión
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
 }

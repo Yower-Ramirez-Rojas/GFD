@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "921454138444",
+    "project_id": "gestor-digital-financiero",
+    "storage_bucket": "gestor-digital-financiero.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921454138444:android:b83d6127e7d70c17ffd0e9",
+        "android_client_info": {
+          "package_name": "com.example.gfd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921454138444-6s147mo3qdjufbg5ujnsm15lcsat92un.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQVKkvkvw3PkYsPIcYPH_gFaV5LTky-FQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921454138444-6s147mo3qdjufbg5ujnsm15lcsat92un.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
