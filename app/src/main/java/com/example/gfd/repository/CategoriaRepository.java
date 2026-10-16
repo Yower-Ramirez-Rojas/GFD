@@ -21,12 +21,12 @@ public class CategoriaRepository {
         executorService = Executors.newSingleThreadExecutor();
     }
 
-    // ¡NUEVO! Ahora le pasamos el ID de la carpeta para traer solo sus apartados
+
     public LiveData<List<Categoria>> getCategoriasPorPresupuesto(int presupuestoId) {
         return categoriaDao.obtenerCategoriasPorPresupuesto(presupuestoId);
     }
 
-    // ¡NUEVO! Calcula el total gastado, pero solo de esa carpeta
+
     public LiveData<Double> getSaldoTotalPorPresupuesto(int presupuestoId) {
         return categoriaDao.obtenerSaldoTotalPorPresupuesto(presupuestoId);
     }

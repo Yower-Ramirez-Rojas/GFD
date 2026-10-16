@@ -30,10 +30,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // 1. Inicializamos Firebase Auth
+
         mAuth = FirebaseAuth.getInstance();
 
-        // 2. Configuramos qué datos le pediremos a Google (el correo y el token de identidad)
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -41,15 +41,14 @@ public class LoginActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // 3. Programamos el clic del botón de Google que creaste en el XML
+
         findViewById(R.id.btnGoogleSignIn).setOnClickListener(v -> iniciarSesionGoogle());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        // Verificamos si ya hay un usuario que inició sesión antes.
-        // ¡Así no le pedimos que se loguee cada vez que abre la app!
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             irAlMenuPrincipal();
@@ -65,11 +64,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Atrapamos la respuesta de la ventanita de Google
+
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // El inicio de sesión en Google fue exitoso, ahora lo registramos en Firebase
+
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 autenticarEnFirebase(account.getIdToken());
             } catch (ApiException e) {
@@ -84,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // ¡Boom! Usuario logueado correctamente
+
                         irAlMenuPrincipal();
                     } else {
                         Toast.makeText(LoginActivity.this, "Error de Autenticación en Firebase", Toast.LENGTH_SHORT).show();
@@ -95,6 +94,6 @@ public class LoginActivity extends AppCompatActivity {
     private void irAlMenuPrincipal() {
         Intent intent = new Intent(this, MenuPrincipalActivity.class);
         startActivity(intent);
-        finish(); // Destruimos la pantalla de Login para que al presionar "Atrás" el usuario no vuelva aquí, sino que salga de la app
+        finish();
     }
 }

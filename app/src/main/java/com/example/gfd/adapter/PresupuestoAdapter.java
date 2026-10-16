@@ -72,7 +72,7 @@ public class PresupuestoAdapter extends RecyclerView.Adapter<PresupuestoAdapter.
             tvNombre = itemView.findViewById(R.id.tvNombrePresupuesto);
             tvSueldoBase = itemView.findViewById(R.id.tvSueldoBasePresupuesto);
 
-            // Clic normal: Entrar a la carpeta
+
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (clickListener != null && position != RecyclerView.NO_POSITION) {
@@ -80,7 +80,7 @@ public class PresupuestoAdapter extends RecyclerView.Adapter<PresupuestoAdapter.
                 }
             });
 
-            // Clic largo: Borrar la carpeta
+
             itemView.setOnLongClickListener(v -> {
                 int position = getAdapterPosition();
                 if (longClickListener != null && position != RecyclerView.NO_POSITION) {

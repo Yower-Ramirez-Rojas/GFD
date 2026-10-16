@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- ¡NUEVO! Permiso vital para que Firebase se conecte a Internet -->
+
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GFD">
 
-        <!-- ¡NUEVO! La pantalla de Login ahora es el portero principal -->
+
         <activity
             android:name=".view.LoginActivity"
             android:exported="true">
@@ -25,12 +25,12 @@
             </intent-filter>
         </activity>
 
-        <!-- El Menú Principal ahora es secundario (se abre DESPUÉS de loguearse) -->
+
         <activity
             android:name=".view.MenuPrincipalActivity"
             android:exported="false" />
 
-        <!-- La pantalla de los gastos detallados sigue siendo secundaria -->
+
         <activity
             android:name=".view.MainActivity"
             android:exported="false"

@@ -16,7 +16,7 @@ public interface PresupuestoDao {
     @Delete
     void eliminar(Presupuesto presupuesto);
 
-    // Nos trae todas las carpetas que el usuario ha creado, ordenadas de la más nueva a la más vieja
+
     @Query("SELECT * FROM tabla_presupuestos ORDER BY id DESC")
     LiveData<List<Presupuesto>> obtenerTodosLosPresupuestos();
 }

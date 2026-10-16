@@ -15,9 +15,9 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
     private List<Categoria> listaCategorias = new ArrayList<>();
     private double sueldoBase = 0;
-    private OnItemLongClickListener listener; // Nuestro nuevo escuchador
+    private OnItemLongClickListener listener;
 
-    // Interfaz para avisarle al MainActivity qué tarjeta presionaste
+
     public interface OnItemLongClickListener {
         void onItemLongClick(Categoria categoria);
     }
@@ -79,12 +79,12 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
             tvMonto = itemView.findViewById(R.id.tvMontoCategoria);
             tvPorcentaje = itemView.findViewById(R.id.tvPorcentaje);
 
-            // ¡Aquí detectamos que mantuviste el dedo presionado!
+
             itemView.setOnLongClickListener(v -> {
                 int position = getAdapterPosition();
                 if (listener != null && position != RecyclerView.NO_POSITION) {
                     listener.onItemLongClick(listaCategorias.get(position));
-                    return true; // true significa "yo me encargo de este clic"
+                    return true;
                 }
                 return false;
             });

@@ -42,7 +42,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             adapter.setPresupuestos(presupuestos);
         });
 
-        // Al hacer clic normal, viajamos a la MainActivity y le mandamos el ID de la carpeta
+
         adapter.setOnItemClickListener(presupuesto -> {
             Intent intent = new Intent(MenuPrincipalActivity.this, MainActivity.class);
             intent.putExtra("PRESUPUESTO_ID", presupuesto.id);
@@ -50,17 +50,17 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Al mantener presionado, borramos la carpeta
+
         adapter.setOnItemLongClickListener(presupuesto -> {
             mostrarDialogoEliminar(presupuesto);
         });
 
-        // Botón "+" para crear nueva carpeta
+
         fabAgregar.setOnClickListener(v -> mostrarDialogoCrearPresupuesto());
     }
 
     private void mostrarDialogoCrearPresupuesto() {
-        // Armamos el diseño de la ventanita desde código (sin XML extra)
+
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(50, 40, 50, 10);

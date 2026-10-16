@@ -18,12 +18,12 @@ public class CategoriaViewModel extends AndroidViewModel {
         repository = new CategoriaRepository(application);
     }
 
-    // Pasamos el ID hacia el repositorio
+
     public LiveData<List<Categoria>> getCategoriasPorPresupuesto(int presupuestoId) {
         return repository.getCategoriasPorPresupuesto(presupuestoId);
     }
 
-    // Pasamos el ID hacia el repositorio
+
     public LiveData<Double> getSaldoTotalPorPresupuesto(int presupuestoId) {
         return repository.getSaldoTotalPorPresupuesto(presupuestoId);
     }

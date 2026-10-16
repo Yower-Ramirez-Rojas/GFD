@@ -9,10 +9,10 @@ public class Presupuesto {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public String nombre; // Ej: "Octubre 2026", "Ahorros Viaje"
-    public double sueldoBase; // Cada carpeta tiene su propio dinero inicial
+    public String nombre;
+    public double sueldoBase;
 
-    // Constructor vacío exigido por Room
+
     public Presupuesto() {
     }
 

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvSueldoTotal;
     private CategoriaAdapter adapter;
 
-    // ¡NUEVO! Aquí guardaremos el ID de la carpeta que tocaste en el menú
+
     private int presupuestoId = -1;
     private double sueldoBaseActual = 0;
     private double totalAsignadoActual = 0;
@@ -38,23 +38,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1. Recibimos los datos de la carpeta que nos mandó el Menú
+
         if (getIntent() != null) {
             presupuestoId = getIntent().getIntExtra("PRESUPUESTO_ID", -1);
             sueldoBaseActual = getIntent().getDoubleExtra("SUELDO_BASE", 0);
         }
 
-        // 2. Conectamos los IDs
+
         tvSaldoDisponible = findViewById(R.id.tvSaldoDisponible);
         tvSueldoTotal = findViewById(R.id.tvSueldoTotal);
         FloatingActionButton fabAgregar = findViewById(R.id.fabAgregarCategoria);
         ImageView btnEditarSueldo = findViewById(R.id.btnEditarSueldo);
         RecyclerView recyclerView = findViewById(R.id.recyclerViewCategorias);
 
-        // Ocultamos el botón de editar sueldo porque ahora el sueldo se define al crear la carpeta
+
         btnEditarSueldo.setVisibility(View.GONE);
 
-        // 3. Configuramos la lista
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         adapter = new CategoriaAdapter();
@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-        // 4. Conectamos la base de datos
+
         categoriaViewModel = new ViewModelProvider(this).get(CategoriaViewModel.class);
 
-        // ¡NUEVO! Observamos solo los datos de esta carpeta en específico
+
         if (presupuestoId != -1) {
             categoriaViewModel.getSaldoTotalPorPresupuesto(presupuestoId).observe(this, saldo -> {
                 totalAsignadoActual = (saldo != null) ? saldo : 0;
@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity {
             });
         } else {
             Toast.makeText(this, "Error al cargar la sesión", Toast.LENGTH_SHORT).show();
-            finish(); // Cierra la pantalla si hubo un error al cargar
+            finish();
         }
 
-        // 5. Botón agregar
+
         fabAgregar.setOnClickListener(v -> mostrarDialogoAgregar());
 
         actualizarUI();

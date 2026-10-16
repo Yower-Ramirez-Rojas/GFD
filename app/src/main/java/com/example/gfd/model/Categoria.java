@@ -4,18 +4,18 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-// Le decimos a Room que esta tabla está amarrada a la tabla de presupuestos
+
 @Entity(tableName = "tabla_categorias",
         foreignKeys = @ForeignKey(entity = Presupuesto.class,
                 parentColumns = "id",
                 childColumns = "presupuestoId",
-                onDelete = ForeignKey.CASCADE)) // CASCADE: Si borras "Octubre", se borran todos sus gastos
+                onDelete = ForeignKey.CASCADE))
 public class Categoria {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public int presupuestoId; // <--- ESTE ES EL GANCHO HACIA LA CARPETA PADRE
+    public int presupuestoId;
 
     public String nombre;
     public double montoAsignado;
