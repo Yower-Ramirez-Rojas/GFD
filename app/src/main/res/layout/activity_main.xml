@@ -3,23 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/azul_noche">
 
-    <!-- Tarjeta de Resumen Superior (El Dashboard) -->
+    <!-- Dashboard: Tarjeta Resumen Superior -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardResumen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/blanco_puro"
         app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
+        app:cardElevation="8dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="24dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,19 +32,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Sueldo del Mes"
-                    android:textColor="#757575"
+                    android:text="Presupuesto Base"
+                    android:textColor="@color/gris_pizarra"
                     android:textSize="14sp" />
 
-                <!-- Ícono del lápiz para editar el sueldo -->
+                <!-- Ícono para editar el presupuesto -->
                 <ImageView
                     android:id="@+id/btnEditarSueldo"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@android:drawable/ic_menu_edit"
-                    app:tint="#757575"/>
+                    app:tint="@color/gris_pizarra"/>
             </LinearLayout>
 
+            <!-- Monto del Presupuesto Base -->
             <TextView
                 android:id="@+id/tvSueldoTotal"
                 android:layout_width="match_parent"
@@ -51,12 +53,12 @@
                 android:text="$0"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="#212121" />
+                android:textColor="@color/negro_carbon" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E0E0E0"
+                android:background="@color/gris_pizarra"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"/>
 
@@ -64,9 +66,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Disponible para asignar"
-                android:textColor="#757575"
+                android:textColor="@color/gris_pizarra"
                 android:textSize="14sp" />
 
+            <!-- Saldo Disponible (Destacado) -->
             <TextView
                 android:id="@+id/tvSaldoDisponible"
                 android:layout_width="match_parent"
@@ -74,27 +77,31 @@
                 android:text="$0"
                 android:textSize="32sp"
                 android:textStyle="bold"
-                android:textColor="#4CAF50" /> <!-- Verde para que resalte -->
+                android:textColor="@color/azul_tecnologico" /> <!-- Usamos el azul brillante para resaltar[cite: 3] -->
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Lista de Apartados/Categorías -->
+    <!-- Lista de Categorías de Gasto -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCategorias"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
+        android:clipToPadding="false"
+        android:paddingBottom="88dp"
         app:layout_constraintTop_toBottomOf="@id/cardResumen"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <!-- Botón Flotante (+) -->
+    <!-- Botón Flotante para agregar gastos -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAgregarCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="@color/azul_tecnologico"
+        app:tint="@color/blanco_puro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Cuando el usuario mantiene presionado el botón -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/azul_noche" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+
+    <!-- Estado normal del botón -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/azul_tecnologico" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+</selector>

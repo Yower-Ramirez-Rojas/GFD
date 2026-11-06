@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:background="?android:attr/selectableItemBackground"> <!-- Efecto de clic -->
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        app:cardBackgroundColor="@color/blanco_puro"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="4dp">
 
-        <TextView
-            android:id="@+id/tvNombrePresupuesto"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Octubre 2026"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#212121" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <TextView
-            android:id="@+id/tvSueldoBasePresupuesto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sueldo inicial: $600.000"
-            android:textSize="16sp"
-            android:textColor="#757575"
-            android:layout_marginTop="4dp"/>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tvNombrePresupuesto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del Presupuesto"
+                android:textColor="@color/negro_carbon"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- ID actualizado para coincidir con el Adapter -->
+            <TextView
+                android:id="@+id/tvSueldoBasePresupuesto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Sueldo inicial: $0"
+                android:textColor="@color/gris_pizarra"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>

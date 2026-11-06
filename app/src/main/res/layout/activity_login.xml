@@ -3,19 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/azul_noche">
 
     <!-- Título Principal -->
     <TextView
         android:id="@+id/tvTituloLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gestor Financiero Digital"
-        android:textSize="28sp"
+        android:text="GESTOR FINANCIERO"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#212121"
-        android:layout_marginTop="100dp"
+        android:textColor="@color/blanco_puro"
+        android:letterSpacing="0.10"
+        android:layout_marginTop="120dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Acento Tecnológico Decorativo (Línea fina azul eléctrico) -->
+    <View
+        android:id="@+id/lineaDecorativa"
+        android:layout_width="60dp"
+        android:layout_height="2dp"
+        android:background="@color/azul_tecnologico"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -24,22 +36,50 @@
         android:id="@+id/tvSubtituloLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Controla tus gastos de forma inteligente"
-        android:textSize="16sp"
-        android:textColor="#757575"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloLogin"
+        android:text="Bienvenido a tu bóveda digital"
+        android:textSize="14sp"
+        android:textColor="@color/gris_pizarra"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/lineaDecorativa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón de Inicio de Sesión de Google -->
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btnGoogleSignIn"
-        android:layout_width="wrap_content"
+    <!-- Tarjeta Blanca Central (Estilo Material CardView) -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="64dp"
+        app:cardBackgroundColor="@color/blanco_puro"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
         app:layout_constraintTop_toBottomOf="@id/tvSubtituloLogin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inicia sesión para continuar"
+                android:textColor="@color/negro_carbon"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Botón de Inicio de Sesión de Google -->
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btnGoogleSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,9 +2,9 @@ package com.example.gfd.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -29,7 +29,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
-        RecyclerView recyclerView = findViewById(R.id.rvPresupuestos);
+        // 1. Conectamos el ID exacto de tu activity_menu_principal.xml
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewPresupuestos);
         FloatingActionButton fabAgregar = findViewById(R.id.fabAgregarPresupuesto);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -42,7 +43,6 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             adapter.setPresupuestos(presupuestos);
         });
 
-
         adapter.setOnItemClickListener(presupuesto -> {
             Intent intent = new Intent(MenuPrincipalActivity.this, MainActivity.class);
             intent.putExtra("PRESUPUESTO_ID", presupuesto.id);
@@ -50,33 +50,21 @@ public class MenuPrincipalActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
         adapter.setOnItemLongClickListener(presupuesto -> {
             mostrarDialogoEliminar(presupuesto);
         });
-
 
         fabAgregar.setOnClickListener(v -> mostrarDialogoCrearPresupuesto());
     }
 
     private void mostrarDialogoCrearPresupuesto() {
-
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(50, 40, 50, 10);
-
-        EditText etNombre = new EditText(this);
-        etNombre.setHint("Ej: Octubre 2026, Viaje...");
-        layout.addView(etNombre);
-
-        EditText etSueldo = new EditText(this);
-        etSueldo.setHint("Sueldo / Dinero Inicial");
-        etSueldo.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        layout.addView(etSueldo);
+        // 2. Cargamos el diseño personalizado de dialog_agregar_presupuesto.xml
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_agregar_presupuesto, null);
+        EditText etNombre = view.findViewById(R.id.etNombrePresupuesto);
+        EditText etSueldo = view.findViewById(R.id.etSueldoInicial);
 
         new AlertDialog.Builder(this)
-                .setTitle("Nueva Sesión")
-                .setView(layout)
+                .setView(view)
                 .setPositiveButton("Crear", (dialog, which) -> {
                     String nombre = etNombre.getText().toString().trim();
                     String sueldoStr = etSueldo.getText().toString().trim();
