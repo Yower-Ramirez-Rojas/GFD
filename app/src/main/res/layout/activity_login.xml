@@ -31,19 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Subtítulo / Descripción -->
-    <TextView
-        android:id="@+id/tvSubtituloLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bienvenido a tu bóveda digital"
-        android:textSize="14sp"
-        android:textColor="@color/gris_pizarra"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/lineaDecorativa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <!-- Tarjeta Blanca Central (Estilo Material CardView) -->
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
@@ -53,7 +40,7 @@
         app:cardBackgroundColor="@color/blanco_puro"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtituloLogin"
+        app:layout_constraintTop_toBottomOf="@id/lineaDecorativa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -64,7 +51,9 @@
             android:padding="32dp"
             android:gravity="center">
 
+            <!-- Texto dinámico para saludar por el correo -->
             <TextView
+                android:id="@+id/tvCuentaRecordada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Inicia sesión para continuar"
@@ -73,11 +62,43 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="24dp"/>
 
-            <!-- Botón de Inicio de Sesión de Google -->
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/btnGoogleSignIn"
+            <!-- Botón Principal: Huella (Fintech Style) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHuella"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Ingresar con Huella"
+                android:textColor="@color/blanco_puro"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/azul_tecnologico"
+                app:cornerRadius="12dp"
+                app:icon="@android:drawable/ic_secure"
+                app:iconGravity="textStart"
+                app:iconTint="@color/blanco_puro" />
+
+            <!-- Separador visual O -->
+            <TextView
+                android:id="@+id/tvSeparador"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="o"
+                android:textColor="@color/gris_pizarra"
+                android:textSize="14sp"
+                android:layout_marginVertical="12dp"/>
+
+            <!-- Botón Secundario: Clásico / Google -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGoogleClasico"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Vincular cuenta de Google"
+                android:textColor="@color/negro_carbon"
+                android:textSize="14sp"
+                app:cornerRadius="12dp"
+                app:strokeColor="#E0E0E0"
+                app:strokeWidth="1dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

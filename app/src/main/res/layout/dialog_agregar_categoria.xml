@@ -7,7 +7,6 @@
     android:padding="24dp"
     android:background="@color/blanco_puro">
 
-    <!-- Encabezado del Cuadro -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,12 +16,11 @@
         android:textStyle="bold"
         android:layout_marginBottom="24dp" />
 
-    <!-- Recuadro 1: Nombre de la Categoría (Arriendo, Luz, etc.) -->
+    <!-- Campo: Nombre del Apartado -->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ej. Arriendo, Supermercado, Luz"
         android:layout_marginBottom="16dp"
         app:boxStrokeColor="@color/azul_tecnologico"
         app:hintTextColor="@color/azul_tecnologico">
@@ -31,17 +29,18 @@
             android:id="@+id/etNombreCategoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Ej: Arriendo, Supermercado, Luz"
+            android:textColorHint="#757575"
             android:inputType="textCapSentences"
             android:textColor="@color/negro_carbon"
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Recuadro 2: Monto Asignado -->
+    <!-- Campo: Monto Asignado -->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Monto asignado ($)"
         app:boxStrokeColor="@color/azul_tecnologico"
         app:hintTextColor="@color/azul_tecnologico">
 
@@ -49,6 +48,8 @@
             android:id="@+id/etMontoCategoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Monto asignado ($)"
+            android:textColorHint="#757575"
             android:inputType="numberDecimal"
             android:textColor="@color/negro_carbon"
             android:textSize="15sp" />

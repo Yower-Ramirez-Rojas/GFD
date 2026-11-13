@@ -43,6 +43,12 @@
                     android:layout_height="24dp"
                     android:src="@android:drawable/ic_menu_edit"
                     app:tint="@color/gris_pizarra"/>
+                <ImageView
+                    android:id="@+id/btnCompartir"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_share"
+                    app:tint="@color/azul_tecnologico" />
             </LinearLayout>
 
             <!-- Monto del Presupuesto Base -->

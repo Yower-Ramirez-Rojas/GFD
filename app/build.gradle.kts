@@ -43,6 +43,12 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
 
+    // ... dentro de dependencies { ... }
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("androidx.biometric:biometric:1.1.0")
+
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
     // Librerías gráficas para las tarjetas y la lista (Faltaban estas)
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")

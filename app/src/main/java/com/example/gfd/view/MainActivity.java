@@ -1,5 +1,6 @@
 package com.example.gfd.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvSueldoTotal;
     private CategoriaAdapter adapter;
 
-
     private int presupuestoId = -1;
     private double sueldoBaseActual = 0;
     private double totalAsignadoActual = 0;
@@ -38,23 +38,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        // 1. Recibimos los datos del presupuesto
         if (getIntent() != null) {
             presupuestoId = getIntent().getIntExtra("PRESUPUESTO_ID", -1);
             sueldoBaseActual = getIntent().getDoubleExtra("SUELDO_BASE", 0);
         }
 
-
+        // 2. Conectamos la interfaz
         tvSaldoDisponible = findViewById(R.id.tvSaldoDisponible);
         tvSueldoTotal = findViewById(R.id.tvSueldoTotal);
         FloatingActionButton fabAgregar = findViewById(R.id.fabAgregarCategoria);
         ImageView btnEditarSueldo = findViewById(R.id.btnEditarSueldo);
+        ImageView btnCompartir = findViewById(R.id.btnCompartir);
         RecyclerView recyclerView = findViewById(R.id.recyclerViewCategorias);
 
+        // 3. Asignamos los clics a los botones superiores
+        btnCompartir.setOnClickListener(v -> compartirReporte());
+        btnEditarSueldo.setOnClickListener(v -> mostrarDialogoEditarSueldo());
 
-        btnEditarSueldo.setVisibility(View.GONE);
-
-
+        // 4. Configuramos el RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         adapter = new CategoriaAdapter();
@@ -66,9 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-
+        // 5. Conectamos con la Base de Datos (ViewModel)
         categoriaViewModel = new ViewModelProvider(this).get(CategoriaViewModel.class);
-
 
         if (presupuestoId != -1) {
             categoriaViewModel.getSaldoTotalPorPresupuesto(presupuestoId).observe(this, saldo -> {
@@ -84,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-
         fabAgregar.setOnClickListener(v -> mostrarDialogoAgregar());
 
         actualizarUI();
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void actualizarUI() {
         double disponible = sueldoBaseActual - totalAsignadoActual;
+
         tvSueldoTotal.setText(String.format("$%,.0f", sueldoBaseActual));
         tvSaldoDisponible.setText(String.format("$%,.0f", disponible));
         if (adapter != null) {
@@ -112,11 +113,35 @@ public class MainActivity extends AppCompatActivity {
 
                     if (!nombre.isEmpty() && !montoStr.isEmpty()) {
                         double monto = Double.parseDouble(montoStr);
-                        // ¡NUEVO! Le decimos a la base de datos a qué carpeta pertenece este gasto
                         Categoria nuevaCategoria = new Categoria(presupuestoId, nombre, monto, false);
                         categoriaViewModel.insertar(nuevaCategoria);
                     } else {
                         Toast.makeText(this, "Por favor, llena todos los campos", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
+    private void mostrarDialogoEditarSueldo() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_editar_presupuesto, null);
+        EditText etNuevoSueldo = view.findViewById(R.id.etNuevoSueldo);
+
+        // Autocompletamos con el sueldo actual para facilitar la edición
+        etNuevoSueldo.setText(String.valueOf(sueldoBaseActual));
+
+        new AlertDialog.Builder(this)
+                .setView(view)
+                .setPositiveButton("Actualizar", (dialog, which) -> {
+                    String montoStr = etNuevoSueldo.getText().toString().trim();
+
+                    if (!montoStr.isEmpty()) {
+                        double nuevoSueldo = Double.parseDouble(montoStr);
+                        sueldoBaseActual = nuevoSueldo;
+                        actualizarUI();
+                        Toast.makeText(this, "Sueldo actualizado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Por favor, ingresa un monto", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton("Cancelar", null)
@@ -133,5 +158,24 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
+    }
+
+    private void compartirReporte() {
+        double disponible = sueldoBaseActual - totalAsignadoActual;
+
+        String reporte = "📊 *REPORTE FINANCIERO GFD*\n\n" +
+                "💰 Sueldo Inicial: $" + String.format("%,.0f", sueldoBaseActual) + "\n" +
+                "📉 Total Gastos: $" + String.format("%,.0f", totalAsignadoActual) + "\n" +
+                "💵 Saldo Disponible: $" + String.format("%,.0f", disponible) + "\n\n" +
+                "Seguridad Biométrica Activa 🔒\n" +
+                "Generado desde mi Bóveda GFD.";
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, reporte);
+        sendIntent.setType("text/plain");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, "Compartir reporte financiero vía...");
+        startActivity(shareIntent);
     }
 }

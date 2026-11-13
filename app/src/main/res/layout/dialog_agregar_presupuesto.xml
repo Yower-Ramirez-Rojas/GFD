@@ -21,7 +21,6 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ej: Octubre 2026, Viaje..."
         android:layout_marginBottom="16dp"
         app:boxStrokeColor="@color/azul_tecnologico"
         app:hintTextColor="@color/azul_tecnologico">
@@ -30,6 +29,8 @@
             android:id="@+id/etNombrePresupuesto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Ej: Octubre 2026, Viaje..."
+            android:textColorHint="#757575"
             android:inputType="textCapSentences"
             android:textColor="@color/negro_carbon"
             android:textSize="15sp" />
@@ -40,7 +41,6 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Sueldo / Dinero inicial"
         app:boxStrokeColor="@color/azul_tecnologico"
         app:hintTextColor="@color/azul_tecnologico">
 
@@ -48,6 +48,8 @@
             android:id="@+id/etSueldoInicial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Sueldo / Dinero inicial ($)"
+            android:textColorHint="#757575"
             android:inputType="numberDecimal"
             android:textColor="@color/negro_carbon"
             android:textSize="15sp" />
